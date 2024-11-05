@@ -47,4 +47,46 @@ INSERT INTO Reservas (id_hospede, id_quarto, data_entrada, data_saida) VALUES
 (4, 4, '2025-10-01', '2025-10-05'),
 (5, 5, '2025-02-17', '2025-02-24');
 
+/*listar apenas os hóspedes que já finalizaram suas estadias.*/
+
+SELECT 
+       h.nome AS hospede,
+       q.numero_quarto AS quarto,
+       r.data_entrada,
+       r.data_saida
+FROM
+       hospedes h
+JOIN 
+       reservas r ON h.id_hospede = r.id_hospede
+JOIN
+       quartos q ON r.id_quarto = q.id_quarto
+WHERE
+       r.data_saida BETWEEN '2024-12-25' AND '2024-12-29';
+
+/* consulta para mostrar todos os hóspedes, incluindo aqueles que ainda estão com reservas ativas.*/
+SELECT 
+       h.nome AS hospede,
+       q.numero_quarto AS quarto,
+       r.data_entrada,
+       r.data_saida
+FROM
+       hospedes h
+JOIN 
+       reservas r ON h.id_hospede = r.id_hospede
+JOIN
+       quartos q ON r.id_quarto = q.id_quarto;
+
+/* consulta para mostrar apenas os quartos que ainda não foram reservados.*/
+SELECT 
+       q.numero_quarto AS quarto,
+       q.quarto_disponível AS disponivel,
+       q.preco_diaria
+FROM
+       quartos q
+JOIN 
+       reservas r ON q.id_quarto = r.id_quarto
+WHERE
+       r.id_reserva IS NULL;
+
+       
 
