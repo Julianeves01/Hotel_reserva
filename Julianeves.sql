@@ -11,7 +11,7 @@ CREATE TABLE Hospedes (
 CREATE TABLE Quartos (
     id_quarto SERIAL PRIMARY KEY,
     numero_quarto INT UNIQUE NOT NULL,
-    tipo VARCHAR(50),
+    quarto_disponível BOOLEAN NOT NULL,
     preco_diaria DECIMAL(10,2)
 );
 
